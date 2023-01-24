@@ -10,10 +10,12 @@
     "express": "^4"
   },
   "devDependencies": {
+    "@sap/ux-specification": "^1.102.15",
     "sqlite3": "^5.0.4"
   },
   "scripts": {
-    "start": "cds run"
+    "start": "cds run",
+    "watch-employees": "cds watch --open employees/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "engines": {
     "node": "^16.15"
@@ -49,5 +51,8 @@
         "kind": "sql"
       }
     }
-  }
+  },
+  "sapux": [
+    "app/employees"
+  ]
 }

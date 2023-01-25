@@ -22,6 +22,16 @@ annotate service.Employees with @(
             Label : 'emailAddress',
             Value : emailAddress,
         },
+        {
+            $Type : 'UI.DataField',
+            Label : 'isManager',
+            Value : isManager,
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'supervisor',
+            Value : supervisorName
+        },
     ]
 );
 annotate service.Employees with @(
@@ -47,6 +57,11 @@ annotate service.Employees with @(
                 $Type : 'UI.DataField',
                 Label : 'emailAddress',
                 Value : emailAddress,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'supervisor',
+                Value : supervisorName,
             },
         ],
     },

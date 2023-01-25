@@ -7,4 +7,14 @@ entity Employees: managed {
     lastName: String(50);
     dateOfBirth: Date;
     emailAddress: String(100);
+    isManager: Boolean;
+    supervisor: Association to one Employees;
+    Comments: Composition of many Comments on Comments.target=$self;
+}
+
+entity Comments: managed {
+    key ID: UUID @(Core.Computed: true);
+    target: Association to Employees;
+    author: Association to Employees;
+    content: String;
 }

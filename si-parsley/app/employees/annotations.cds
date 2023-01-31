@@ -1,6 +1,6 @@
-using UserService as service from '../../srv/user-service';
+using UserService as UserService from '../../srv/user-service';
 
-annotate service.Employees with @(
+annotate UserService.Employees with @(
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
@@ -34,7 +34,7 @@ annotate service.Employees with @(
         }
     ]
 );
-annotate service.Employees with @(
+annotate UserService.Employees with @(
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
         Data : [
@@ -90,7 +90,7 @@ annotate service.Employees with @(
     ]
 );
 
-annotate service.Comments with @(
+annotate UserService.Comments with @(
     UI.LineItem: [
         {
             $Type: 'UI.DataField',

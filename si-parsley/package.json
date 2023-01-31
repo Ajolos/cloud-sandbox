@@ -16,7 +16,8 @@
   "scripts": {
     "start": "cds run",
     "watch-employees": "cds watch --open employees/webapp/index.html?sap-ui-xx-viewCache=false",
-    "watch-pl.sic.parsley.employees": "cds watch --open pl.sic.parsley.employees/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-pl.sic.parsley.employees": "cds watch --open pl.sic.parsley.employees/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-departments": "cds watch --open departments/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "engines": {
     "node": "^16.15"
@@ -57,6 +58,9 @@
     "app/employees",
     "app/pl.sic.parsley.employees",
     "app/pl.sic.parsley.employees",
-    "app/employees"
+    "app/employees",
+    "app/departments",
+    "app/departments",
+    "app/departments"
   ]
 }

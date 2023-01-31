@@ -1,7 +1,7 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Tue Jan 24 2023 13:23:10 GMT+0100 (czas środkowoeuropejski standardowy)|
+|**Generation Date and Time**<br>Tue Jan 31 2023 13:02:37 GMT+0100 (czas środkowoeuropejski standardowy)|
 |**App Generator**<br>@sap/generator-fiori-elements|
 |**App Generator Version**<br>1.7.4|
 |**Generation Platform**<br>Visual Studio Code|
@@ -19,7 +19,7 @@
 
 ## employees
 
-List of employees
+A Fiori application.
 
 ### Starting the generated app
 

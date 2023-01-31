@@ -19,25 +19,30 @@ annotate service.Employees with @(
         },
         {
             $Type : 'UI.DataField',
-            Label : 'emailAddress',
-            Value : emailAddress,
+            Label : 'hireDate',
+            Value : hireDate,
         },
         {
-            $Type : 'UI.DataField',
-            Label : 'isManager',
-            Value : isManager,
+            $Type: 'UI.DataField',
+            Label: 'department',
+            Value: departmentName,
         },
         {
-            $Type : 'UI.DataField',
-            Label : 'supervisor',
-            Value : supervisorName
-        },
+            $Type: 'UI.DataField',
+            Label: 'Manager',
+            Value: supervisor
+        }
     ]
 );
 annotate service.Employees with @(
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
         Data : [
+            {
+                $Type : 'UI.DataField',
+                Label : 'emailAddress',
+                Value : emailAddress,
+            },
             {
                 $Type : 'UI.DataField',
                 Label : 'firstName',
@@ -55,13 +60,18 @@ annotate service.Employees with @(
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'emailAddress',
-                Value : emailAddress,
+                Label : 'hireDate',
+                Value : hireDate,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'supervisor',
-                Value : supervisorName,
+                Label : 'description',
+                Value : description,
+            },
+            {
+                $Type : 'UI.DataField',
+                Label : 'rank',
+                Value : rank,
             },
         ],
     },
@@ -72,5 +82,30 @@ annotate service.Employees with @(
             Label : 'General Information',
             Target : '@UI.FieldGroup#GeneratedGroup1',
         },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : 'Comments/@UI.LineItem',
+            Label : 'Comments',
+        }
     ]
+);
+
+annotate service.Comments with @(
+    UI.LineItem: [
+        {
+            $Type: 'UI.DataField',
+            Label: 'CreatedAt',
+            Value: createdAt,
+        },
+        {
+            $Type: 'UI.DataField',
+            Label: 'Author',
+            Value: Sender.lastName
+        },
+        {
+            $Type: 'UI.DataField',
+            Label: 'Content',
+            Value: content,
+        }
+    ],
 );

@@ -1,4 +1,4 @@
-ID;firstName;lastName;dateOfBirth;emailAddress;isManager;supervisor_id;
-8ad9c908-9bda-11ed-a8fc-0242ac120001;Jan;Kowalski;1960-01-01;jan.kowalski@domain.com;true;;
-8ad9c908-9bda-11ed-a8fc-0242ac120002;Adam;Nowak;1965-02-02;adam.nowak@domain.com;false;8ad9c908-9bda-11ed-a8fc-0242ac120001;
-8ad9c908-9bda-11ed-a8fc-0242ac120003;Anna;Bąk;1970-03-03;anna.bak@domain.com;false;8ad9c908-9bda-11ed-a8fc-0242ac120001;
+emailAddress;firstName;lastName;dateOfBirth;hireDate;description;department_id;
+jan.kowalski@domain.com;Jan;Kowalski;1960-01-01;2000-01-01;opis1;8ad9c908-9bda-11ed-a8fc-0242ac120001;
+ada.nowak@mdomain.com;Ada;Nowak;1965-02-02;2000-02-01;opis2;8ad9c908-9bda-11ed-a8fc-0242ac120001;
+anna.bak@domain.com;Anna;Bąk;1970-03-03;2000-03-01;opis3;8ad9c908-9bda-11ed-a8fc-0242ac120002;

@@ -12,9 +12,38 @@
     <edmx:DataServices>
         <Schema Namespace="UserService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
             <EntityContainer Name="EntityContainer">
-                <EntitySet Name="Employees" EntityType="UserService.Employees"/>
+                <EntitySet Name="Employees" EntityType="UserService.Employees">
+                    <NavigationPropertyBinding Path="Department" Target="Departments"/>
+                </EntitySet>
+                <EntitySet Name="Departments" EntityType="UserService.Departments">
+                    <NavigationPropertyBinding Path="Manager" Target="Employees"/>
+                    <NavigationPropertyBinding Path="SupDepartment" Target="Departments"/>
+                </EntitySet>
+                <EntitySet Name="Comments" EntityType="UserService.Comments">
+                    <NavigationPropertyBinding Path="Sender" Target="Employees"/>
+                    <NavigationPropertyBinding Path="Receiver" Target="Employees"/>
+                </EntitySet>
             </EntityContainer>
             <EntityType Name="Employees">
+                <Key>
+                    <PropertyRef Name="emailAddress"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="emailAddress" Type="Edm.String" MaxLength="100" Nullable="false"/>
+                <Property Name="firstName" Type="Edm.String" MaxLength="50"/>
+                <Property Name="lastName" Type="Edm.String" MaxLength="50"/>
+                <Property Name="dateOfBirth" Type="Edm.Date"/>
+                <Property Name="hireDate" Type="Edm.Date"/>
+                <Property Name="description" Type="Edm.String"/>
+                <NavigationProperty Name="Department" Type="UserService.Departments">
+                    <ReferentialConstraint Property="Department_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="Department_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Departments">
                 <Key>
                     <PropertyRef Name="ID"/>
                 </Key>
@@ -23,10 +52,37 @@
                 <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
                 <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
                 <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="firstName" Type="Edm.String" MaxLength="50"/>
-                <Property Name="lastName" Type="Edm.String" MaxLength="50"/>
-                <Property Name="dateOfBirth" Type="Edm.Date"/>
-                <Property Name="emailAddress" Type="Edm.String" MaxLength="100"/>
+                <Property Name="departmentName" Type="Edm.String" MaxLength="40"/>
+                <Property Name="description" Type="Edm.String"/>
+                <NavigationProperty Name="Manager" Type="UserService.Employees">
+                    <ReferentialConstraint Property="Manager_emailAddress" ReferencedProperty="emailAddress"/>
+                </NavigationProperty>
+                <Property Name="Manager_emailAddress" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="SupDepartment" Type="UserService.Departments">
+                    <ReferentialConstraint Property="SupDepartment_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="SupDepartment_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Comments">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="timestamp" Type="Edm.DateTimeOffset"/>
+                <Property Name="content" Type="Edm.String"/>
+                <Property Name="value" Type="Edm.Int32"/>
+                <NavigationProperty Name="Sender" Type="UserService.Employees">
+                    <ReferentialConstraint Property="Sender_emailAddress" ReferencedProperty="emailAddress"/>
+                </NavigationProperty>
+                <Property Name="Sender_emailAddress" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="Receiver" Type="UserService.Employees">
+                    <ReferentialConstraint Property="Receiver_emailAddress" ReferencedProperty="emailAddress"/>
+                </NavigationProperty>
+                <Property Name="Receiver_emailAddress" Type="Edm.String" MaxLength="100"/>
             </EntityType>
             <Annotations Target="UserService.Employees/createdAt">
                 <Annotation Term="UI.HiddenFilter" Bool="true"/>
@@ -52,9 +108,60 @@
                                 <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
                                     <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
                                     </Annotations>
-                                    <Annotations Target="UserService.Employees/ID">
+                                    <Annotations Target="UserService.Departments/createdAt">
+                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                        <Annotation Term="Core.Immutable" Bool="true"/>
                                         <Annotation Term="Core.Computed" Bool="true"/>
-                                    </Annotations>
-                                </Schema>
-                            </edmx:DataServices>
-                        </edmx:Edmx>
+                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                        </Annotations>
+                                        <Annotations Target="UserService.Departments/createdBy">
+                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                </Annotations>
+                                                <Annotations Target="UserService.Departments/modifiedAt">
+                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="UserService.Departments/modifiedBy">
+                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="UserService.Departments/ID">
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                            </Annotations>
+                                                            <Annotations Target="UserService.Comments/createdAt">
+                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="UserService.Comments/createdBy">
+                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="UserService.Comments/modifiedAt">
+                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="UserService.Comments/modifiedBy">
+                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                    </Annotations>
+                                                                                    <Annotations Target="UserService.Comments/ID">
+                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                    </Annotations>
+                                                                                </Schema>
+                                                                            </edmx:DataServices>
+                                                                        </edmx:Edmx>

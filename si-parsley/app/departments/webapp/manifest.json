@@ -13,7 +13,7 @@
         "sourceTemplate": {
             "id": "@sap/generator-fiori:lrop",
             "version": "1.7.4",
-            "toolsId": "aa375f30-804f-4967-9c65-63e763108038"
+            "toolsId": "1a8acf74-d696-41ed-93c0-66923d8ea71f"
         },
         "dataSources": {
             "mainService": {
@@ -119,11 +119,6 @@
                     "pattern": "Department({key}):?query:",
                     "name": "DepartmentObjectPage",
                     "target": "DepartmentObjectPage"
-                },
-                {
-                    "pattern": "Department({key})/Employees({key2}):?query:",
-                    "name": "EmployeesObjectPage",
-                    "target": "EmployeesObjectPage"
                 }
             ],
             "targets": {
@@ -152,25 +147,7 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "Department",
-                            "navigation": {
-                                "Employees": {
-                                    "detail": {
-                                        "route": "EmployeesObjectPage"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "EmployeesObjectPage": {
-                    "type": "Component",
-                    "id": "EmployeesObjectPage",
-                    "name": "sap.fe.templates.ObjectPage",
-                    "options": {
-                        "settings": {
-                            "editableHeaderContent": false,
-                            "entitySet": "Employees"
+                            "entitySet": "Department"
                         }
                     }
                 }

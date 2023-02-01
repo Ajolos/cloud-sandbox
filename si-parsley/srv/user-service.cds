@@ -14,7 +14,8 @@ service UserService {
         Department.departmentName as departmentName,
         Department.Manager.firstName || ' ' || Department.Manager.lastName as supervisor: String(50),
         Average.Average as rating,
-        Comments
+        Comments,
+        Department
     };
     entity Departments as projection on my.Departments;
     entity Comments as projection on my.Comments {

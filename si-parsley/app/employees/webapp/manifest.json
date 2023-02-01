@@ -108,7 +108,6 @@
             "css": []
         },
         "routing": {
-            "config": {},
             "routes": [
                 {
                     "pattern": ":?query:",
@@ -136,7 +135,20 @@
                                         "route": "EmployeesObjectPage"
                                     }
                                 }
-                            }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "enableExport": false,
+                                        "personalization": {
+                                            "column": false,
+                                            "filter": false,
+                                            "sort": false
+                                        }
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled"
                         }
                     }
                 },
@@ -147,10 +159,28 @@
                     "options": {
                         "settings": {
                             "editableHeaderContent": false,
-                            "entitySet": "Employees"
+                            "entitySet": "Employees",
+                            "controlConfiguration": {
+                                "Comments/@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "tableSettings": {
+                                        "enableExport": false,
+                                        "selectionMode": "None",
+                                        "personalization": {
+                                            "column": false,
+                                            "filter": false,
+                                            "sort": false
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {}
             }
         }
     },

@@ -8,6 +8,7 @@ entity Employees: managed {
     dateOfBirth: Date;    
     hireDate: Date;
     description: String;
+    position: String;
     Department: Association to one Departments;
     Comments: Association to many Comments on Comments.Receiver = $self;
     Average: Association to one AggrComment on Average.Receiver = $self;

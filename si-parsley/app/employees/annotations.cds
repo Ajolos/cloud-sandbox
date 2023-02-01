@@ -1,86 +1,101 @@
 using UserService as service from '../../srv/user-service';
 
 annotate service.Employees with @(
+    UI.DataPoint #Position: {
+        Title: '{i18n>Position}',
+        Value: position,
+    },
+    UI.DataPoint #Rating: {
+        Title: '{i18n>Rating}',
+        Value: rating,
+        TargetValue : 5,
+        Visualization : #Rating,
+    },
     UI.LineItem : [
         {
             $Type : 'UI.DataField',
-            Label : 'firstName',
             Value : firstName,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
         },
         {
             $Type : 'UI.DataField',
-            Label : 'lastName',
             Value : lastName,
-        },
-        {
-            $Type : 'UI.DataField',
-            Label : 'dateOfBirth',
-            Value : dateOfBirth,
-        },
-        {
-            $Type : 'UI.DataField',
-            Label : 'hireDate',
-            Value : hireDate,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
         },
         {
             $Type: 'UI.DataField',
-            Label: 'department',
+            Value: position,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
+        },
+        {
+            $Type: 'UI.DataField',
             Value: departmentName,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
         },
         {
             $Type: 'UI.DataField',
-            Label: 'Manager',
-            Value: supervisor
+            Value: supervisor,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : dateOfBirth,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : hireDate,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
         }
-    ]
-);
-annotate service.Employees with @(
+    ],
     UI.FieldGroup #GeneratedGroup1 : {
         $Type : 'UI.FieldGroupType',
         Data : [
             {
                 $Type : 'UI.DataField',
-                Label : 'emailAddress',
                 Value : emailAddress,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'firstName',
-                Value : firstName,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'lastName',
-                Value : lastName,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'dateOfBirth',
                 Value : dateOfBirth,
             },
             {
                 $Type : 'UI.DataField',
-                Label : 'hireDate',
                 Value : hireDate,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'description',
-                Value : description,
-            },
-            {
-                $Type : 'UI.DataField',
-                Label : 'rank',
-                Value : rank,
-            },
+            }
         ],
     },
+    UI.FieldGroup #DescriptionGroup : {
+        $Type: 'UI.FieldGroupType',
+        Data: [
+            {
+                $Type : 'UI.DataField',
+                Value : description,
+            }
+        ]
+    },
+    UI.HeaderFacets:[
+        {
+            $Type:'UI.ReferenceFacet',
+            Target: '@UI.DataPoint#Position'
+        },
+        {
+            $Type: 'UI.ReferenceFacet',
+            Target: '@UI.DataPoint#Rating'
+        }        
+    ],
     UI.Facets : [
         {
             $Type : 'UI.ReferenceFacet',
             ID : 'GeneratedFacet1',
-            Label : 'General Information',
+            Label : '{i18n>GeneralDataHeader}',
             Target : '@UI.FieldGroup#GeneratedGroup1',
+        },
+        {
+            $Type: 'UI.ReferenceFacet',
+            ID: 'DescriptionFacet',
+            Label: '{i18n>DescriptionHeader}',
+            Target: '@UI.FieldGroup#DescriptionGroup'
         },
         {
             $Type : 'UI.ReferenceFacet',
@@ -91,21 +106,32 @@ annotate service.Employees with @(
 );
 
 annotate service.Comments with @(
+    UI.DataPoint #Rating: {
+        Title: '{i18n>Rating}',
+        Value: rating,
+        TargetValue : 5,
+        Visualization : #Rating,
+    },
+    Capabilities: {
+        Deletable: false
+    },
     UI.LineItem: [
         {
             $Type: 'UI.DataField',
-            Label: 'CreatedAt',
             Value: createdAt,
         },
         {
             $Type: 'UI.DataField',
-            Label: 'Author',
-            Value: Sender.lastName
+            Value: Sender.fullName
+        },
+        {
+            $Type: 'UI.DataFieldForAnnotation',
+            Target : '@UI.DataPoint#Rating',
         },
         {
             $Type: 'UI.DataField',
-            Label: 'Content',
             Value: content,
+            ![@HTML5.CssDefaults]: { width: 'auto'},
         }
     ],
 );

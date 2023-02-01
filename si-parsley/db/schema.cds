@@ -21,6 +21,7 @@ entity Departments: managed {
     description: String;
     Manager: Association to one Employees;
     SupDepartment: Association to one Departments;
+    Employees: Association to many Employees on Employees.Department = $self; 
 }
 
 entity Comments: managed {

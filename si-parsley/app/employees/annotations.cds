@@ -1,6 +1,6 @@
-using UserService as service from '../../srv/user-service';
+using UserService as UserService from '../../srv/user-service';
 
-annotate service.Employees with @(
+annotate UserService.Employees with @(
     UI.DataPoint #Position: {
         Title: '{i18n>Position}',
         Value: position,
@@ -105,7 +105,7 @@ annotate service.Employees with @(
     ]
 );
 
-annotate service.Comments with @(
+annotate UserService.Comments with @(
     UI.DataPoint #Rating: {
         Title: '{i18n>Rating}',
         Value: rating,

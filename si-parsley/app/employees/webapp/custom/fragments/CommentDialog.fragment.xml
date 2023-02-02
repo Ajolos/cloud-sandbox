@@ -1,0 +1,12 @@
+<Dialog binding="{UserService.createComment(...)}" xmlns="sap.m" xmlns:l="sap.ui.layout.form">
+    <l:SimpleForm>
+        <Label text="{i18n>CommentDialog.Rating}"/>
+        <RatingIndicator value="{$Parameter/rating}"/>
+        <Label text="{i18n>CommentDialog.Content}"/>
+        <TextArea value="{$Parameter/content}" width="100%"/>
+    </l:SimpleForm>
+    <buttons>
+        <Button type="Emphasized" text="{i18n>CommentDialog.Confirm}" press="commentConfirmPress"/>
+        <Button text="{i18n>CommentDialog.Cancel}" press="commentCancelPress"/>
+    </buttons>
+</Dialog>

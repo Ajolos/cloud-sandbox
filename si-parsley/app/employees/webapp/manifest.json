@@ -1,206 +1,218 @@
 {
-    "_version": "1.45.0",
-    "sap.app": {
-        "id": "pl.sic.parsley.employees",
-        "type": "application",
-        "i18n": "i18n/i18n.properties",
-        "applicationVersion": {
-            "version": "0.0.1"
-        },
-        "title": "{{appTitle}}",
-        "description": "{{appDescription}}",
-        "resources": "resources.json",
-        "sourceTemplate": {
-            "id": "@sap/generator-fiori:lrop",
-            "version": "1.7.4",
-            "toolsId": "a22d5db9-84f5-4138-8511-6517a840bef8"
-        },
-        "dataSources": {
-            "mainService": {
-                "uri": "/service/userService/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [
-                        "annotation"
-                    ],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "4.0"
-                }
-            },
-            "annotation": {
-                "type": "ODataAnnotation",
-                "uri": "annotations/annotation.xml",
-                "settings": {
-                    "localUri": "annotations/annotation.xml"
-                }
-            }
-        },
-        "crossNavigation": {
-            "inbounds": {
-                "pl-sic-parsley-employees-inbound": {
-                    "signature": {
-                        "parameters": {},
-                        "additionalParameters": "allowed"
-                    },
-                    "semanticObject": "Employees",
-                    "action": "list",
-                    "title": "{{flpTitle}}",
-                    "subTitle": "{{flpSubtitle}}",
-                    "icon": ""
-                }
-            }
-        }
+  "_version": "1.45.0",
+  "sap.app": {
+    "id": "pl.sic.parsley.employees",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
     },
-    "sap.ui": {
-        "technology": "UI5",
-        "icons": {
-            "icon": "",
-            "favIcon": "",
-            "phone": "",
-            "phone@2": "",
-            "tablet": "",
-            "tablet@2": ""
-        },
-        "deviceTypes": {
-            "desktop": true,
-            "tablet": true,
-            "phone": true
-        }
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.7.4",
+      "toolsId": "a22d5db9-84f5-4138-8511-6517a840bef8"
     },
-    "sap.ui5": {
-        "flexEnabled": true,
-        "dependencies": {
-            "minUI5Version": "1.109.3",
-            "libs": {
-                "sap.m": {},
-                "sap.ui.core": {},
-                "sap.ushell": {},
-                "sap.fe.templates": {}
-            }
-        },
-        "contentDensities": {
-            "compact": true,
-            "cozy": true
-        },
-        "models": {
-            "i18n": {
-                "type": "sap.ui.model.resource.ResourceModel",
-                "settings": {
-                    "bundleName": "pl.sic.parsley.employees.i18n.i18n"
-                }
-            },
-            "": {
-                "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true
-                }
-            },
-            "@i18n": {
-                "type": "sap.ui.model.resource.ResourceModel",
-                "uri": "i18n/i18n.properties"
-            }
-        },
-        "resources": {
-            "css": []
-        },
-        "routing": {
-            "routes": [
-                {
-                    "pattern": ":?query:",
-                    "name": "EmployeesList",
-                    "target": "EmployeesList"
-                },
-                {
-                    "pattern": "Employees({key}):?query:",
-                    "name": "EmployeesObjectPage",
-                    "target": "EmployeesObjectPage"
-                }
-            ],
-            "targets": {
-                "EmployeesList": {
-                    "type": "Component",
-                    "id": "EmployeesList",
-                    "name": "sap.fe.templates.ListReport",
-                    "options": {
-                        "settings": {
-                            "entitySet": "Employees",
-                            "variantManagement": "Page",
-                            "navigation": {
-                                "Employees": {
-                                    "detail": {
-                                        "route": "EmployeesObjectPage"
-                                    }
-                                }
-                            },
-                            "controlConfiguration": {
-                                "@com.sap.vocabularies.UI.v1.LineItem": {
-                                    "tableSettings": {
-                                        "enableExport": false,
-                                        "personalization": {
-                                            "column": false,
-                                            "filter": false,
-                                            "sort": false
-                                        }
-                                    }
-                                }
-                            },
-                            "initialLoad": "Enabled"
-                        }
-                    }
-                },
-                "EmployeesObjectPage": {
-                    "type": "Component",
-                    "id": "EmployeesObjectPage",
-                    "name": "sap.fe.templates.ObjectPage",
-                    "options": {
-                        "settings": {
-                            "editableHeaderContent": false,
-                            "entitySet": "Employees",
-                            "controlConfiguration": {
-                                "Comments/@com.sap.vocabularies.UI.v1.LineItem": {
-                                    "tableSettings": {
-                                        "enableExport": false,
-                                        "selectionMode": "None",
-                                        "personalization": {
-                                            "column": false,
-                                            "filter": false,
-                                            "sort": false
-                                        }
-                                    }
-                                }
-                            },
-                            "content": {
-                                "body": {
-                                    "sections": {
-                                        "AboutMe": {
-                                            "template": "pl.sic.parsley.employees.ext.fragment.AboutMe",
-                                            "position": {
-                                                "placement": "After",
-                                                "anchor": "GeneratedFacet1"
-                                            },
-                                            "title": "{i18n>DescriptionHeader}",
-                                            "type": "XMLFragment"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "extends": {
-            "extensions": {
-                "sap.ui.controllerExtensions": {}
-            }
+    "dataSources": {
+      "mainService": {
+        "uri": "/service/userService/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "annotation"
+          ],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
         }
+      },
+      "annotation": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation.xml",
+        "settings": {
+          "localUri": "annotations/annotation.xml"
+        }
+      }
     },
-    "sap.fiori": {
-        "registrationIds": [],
-        "archeType": "transactional"
+    "crossNavigation": {
+      "inbounds": {
+        "pl-sic-parsley-employees-inbound": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "Employees",
+          "action": "list",
+          "title": "{{flpTitle}}",
+          "subTitle": "{{flpSubtitle}}",
+          "icon": ""
+        }
+      }
     }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.109.3",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "pl.sic.parsley.employees.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "EmployeesList",
+          "target": "EmployeesList"
+        },
+        {
+          "pattern": "Employees({key}):?query:",
+          "name": "EmployeesObjectPage",
+          "target": "EmployeesObjectPage"
+        }
+      ],
+      "targets": {
+        "EmployeesList": {
+          "type": "Component",
+          "id": "EmployeesList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "entitySet": "Employees",
+              "variantManagement": "None",
+              "navigation": {
+                "Employees": {
+                  "detail": {
+                    "route": "EmployeesObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "enableExport": false,
+                    "personalization": {
+                      "column": false,
+                      "filter": false,
+                      "sort": false
+                    }
+                  }
+                }
+              },
+              "initialLoad": "Enabled",
+              "hideFilterBar": true
+            }
+          }
+        },
+        "EmployeesObjectPage": {
+          "type": "Component",
+          "id": "EmployeesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": true,
+              "entitySet": "Employees",
+              "controlConfiguration": {
+                "Comments/@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "enableExport": false,
+                    "selectionMode": "None",
+                    "personalization": {
+                      "column": false,
+                      "filter": false,
+                      "sort": false
+                    },
+                    "selectAll": false,
+                    "type": "ResponsiveTable"
+                  },
+                  "actions": {
+                    "callCommentDialog": {
+                      "press": "pl.sic.parsley.employees.custom.ObjectPageExtController.callCommentDialog",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "{i18n>CallCommentDialog}"
+                    }
+                  }
+                }
+              },
+              "content": {
+                "body": {
+                  "sections": {
+                    "AboutMe": {
+                      "template": "pl.sic.parsley.employees.ext.fragment.AboutMe",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "GeneratedFacet1"
+                      },
+                      "title": "{i18n>DescriptionHeader}",
+                      "type": "XMLFragment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {}
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
 }

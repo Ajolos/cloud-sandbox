@@ -2,7 +2,7 @@ namespace pl.sic.parsley;
 using { managed } from '@sap/cds/common';
 
 entity Employees: managed {
-    key emailAddress: String(100);
+    key emailAddress: String(100) @(Core.Immutable: true);
     firstName: String(50);
     lastName: String(50);
     dateOfBirth: Date;    

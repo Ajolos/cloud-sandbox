@@ -1,6 +1,9 @@
 using UserService as UserService from '../../srv/user-service';
 
 annotate UserService.Employees with @(
+    Capabilities.InsertRestrictions: {
+        Insertable: true
+    },
     UI.DataPoint #Position: {
         Title: '{i18n>Position}',
         Value: position,
@@ -65,15 +68,6 @@ annotate UserService.Employees with @(
             }
         ],
     },
-    // UI.FieldGroup #DescriptionGroup : {
-    //     $Type: 'UI.FieldGroupType',
-    //     Data: [
-    //         {
-    //             $Type : 'UI.DataField',
-    //             Value : description,
-    //         }
-    //     ]
-    // },
     UI.HeaderFacets:[
         {
             $Type:'UI.ReferenceFacet',
@@ -91,12 +85,6 @@ annotate UserService.Employees with @(
             Label : '{i18n>GeneralDataHeader}',
             Target : '@UI.FieldGroup#GeneratedGroup1',
         },
-        // {
-        //     $Type: 'UI.ReferenceFacet',
-        //     ID: 'DescriptionFacet',
-        //     Label: '{i18n>DescriptionHeader}',
-        //     Target: '@UI.FieldGroup#DescriptionGroup'
-        // },
         {
             $Type : 'UI.ReferenceFacet',
             Target : 'Comments/@UI.LineItem',
@@ -113,7 +101,8 @@ annotate UserService.Comments with @(
         Visualization : #Rating,
     },
     Capabilities: {
-        Deletable: false
+        Deletable: false,
+        Insertable: true
     },
     UI.LineItem: [
         {

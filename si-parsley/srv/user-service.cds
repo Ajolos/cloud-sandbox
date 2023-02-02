@@ -16,6 +16,9 @@ service UserService {
         Average.Average as rating,
         Comments,
         Department
+       
+    } actions {
+        action createComment( rating: Integer, content: String )
     };
     entity Departments as projection on my.Departments;
     entity Comments as projection on my.Comments {
@@ -27,8 +30,7 @@ service UserService {
 
 annotate UserService.Employees with @(
     Capabilities: {
-        Deletable: false,
-        Insertable: false
+        Deletable: false
     },
     UI: {
         HeaderInfo  : {
@@ -69,7 +71,12 @@ annotate UserService.Employees with @(
     );
 }
 
-annotate UserService.Comments with {
+annotate UserService.Comments with @(
+    Capabilities: {
+        Deletable: false,
+        Insertable: true
+    }
+){
     content @title: '{i18n>Comments.content}';
     author @title: '{i18n>Comments.author}';
     rating @title: '{i18n>Comments.rating}';

@@ -65,15 +65,15 @@ annotate UserService.Employees with @(
             }
         ],
     },
-    UI.FieldGroup #DescriptionGroup : {
-        $Type: 'UI.FieldGroupType',
-        Data: [
-            {
-                $Type : 'UI.DataField',
-                Value : description,
-            }
-        ]
-    },
+    // UI.FieldGroup #DescriptionGroup : {
+    //     $Type: 'UI.FieldGroupType',
+    //     Data: [
+    //         {
+    //             $Type : 'UI.DataField',
+    //             Value : description,
+    //         }
+    //     ]
+    // },
     UI.HeaderFacets:[
         {
             $Type:'UI.ReferenceFacet',
@@ -91,12 +91,12 @@ annotate UserService.Employees with @(
             Label : '{i18n>GeneralDataHeader}',
             Target : '@UI.FieldGroup#GeneratedGroup1',
         },
-        {
-            $Type: 'UI.ReferenceFacet',
-            ID: 'DescriptionFacet',
-            Label: '{i18n>DescriptionHeader}',
-            Target: '@UI.FieldGroup#DescriptionGroup'
-        },
+        // {
+        //     $Type: 'UI.ReferenceFacet',
+        //     ID: 'DescriptionFacet',
+        //     Label: '{i18n>DescriptionHeader}',
+        //     Target: '@UI.FieldGroup#DescriptionGroup'
+        // },
         {
             $Type : 'UI.ReferenceFacet',
             Target : 'Comments/@UI.LineItem',

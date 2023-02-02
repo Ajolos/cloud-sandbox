@@ -172,6 +172,21 @@
                                         }
                                     }
                                 }
+                            },
+                            "content": {
+                                "body": {
+                                    "sections": {
+                                        "AboutMe": {
+                                            "template": "pl.sic.parsley.employees.ext.fragment.AboutMe",
+                                            "position": {
+                                                "placement": "After",
+                                                "anchor": "GeneratedFacet1"
+                                            },
+                                            "title": "{i18n>DescriptionHeader}",
+                                            "type": "XMLFragment"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

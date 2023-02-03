@@ -12,8 +12,6 @@ service UserService {
         description,
         position,
         firstName || ' ' || lastName as fullName: String(100),
-        Department.ID as depId,
-        Department.departmentName as departmentName,
         Department.Manager.firstName || ' ' || Department.Manager.lastName as supervisor: String(50),
         Average.Average as rating,
         Comments,
@@ -74,21 +72,6 @@ annotate UserService.Employees with @(
         title: '{i18n>Employees.HireDate}',
         UI.ExcludeFromNavigationContext
     );
-    departmentName @(
-        title: '{i18n>Employees.Department}',
-        UI.ExcludeFromNavigationContext,
-        Common.ValueListWithFixedValues: true,
-        Common.ValueList: {
-            CollectionPath: 'Departments',
-            Parameters: [
-                {
-                    $Type: 'Common.ValueListParameterInOut',
-                    LocalDataProperty : 'departmentName',
-                    ValueListProperty: 'departmentName'
-                }
-            ]
-        }
-    );
     supervisor @(
         title: '{i18n>Employees.Manager}',
         UI.ExcludeFromNavigationContext
@@ -145,5 +128,8 @@ annotate UserService.Departments with @(
             SemanticObject : 'Departments',
         }
     );
-    departmentName @UI.ExcludeFromNavigationContext
+    departmentName @(
+        UI.ExcludeFromNavigationContext,
+        title: '{i18n>Employees.Department}'
+    );
 };

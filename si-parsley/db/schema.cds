@@ -34,7 +34,7 @@ entity Comments: managed {
 
 entity AggrComment as select from Comments {
     key Receiver as Receiver,
-    avg(Comments.value) as Average: Decimal(3,2)
+    avg(Comments.value) as Average: Decimal(4,2)
 } group by Receiver;
 
 

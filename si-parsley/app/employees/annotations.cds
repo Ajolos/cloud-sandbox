@@ -34,7 +34,7 @@ annotate UserService.Employees with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: departmentName,
+            Value: Department.departmentName,
             ![@HTML5.CssDefaults]: { width: 'auto'},
         },
         {
@@ -119,11 +119,12 @@ annotate UserService.Comments with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: author
+            Value: author,
         },
         {
             $Type: 'UI.DataFieldForAnnotation',
             Target : '@UI.DataPoint#Rating',
+            ![@HTML5.CssDefaults]: { width: '10rem'},
         },
         {
             $Type: 'UI.DataField',

@@ -74,13 +74,6 @@ annotate UserService.Employees with @(
         title: '{i18n>Employees.HireDate}',
         UI.ExcludeFromNavigationContext
     );
-    depId @(
-        title: 'depId',
-        Common: {
-            Text: departmentName,
-            TextArrangement : #TextFirst
-        }
-    );
     departmentName @(
         title: '{i18n>Employees.Department}',
         UI.ExcludeFromNavigationContext,
@@ -133,3 +126,24 @@ annotate UserService.createComment with @(
     }
 );
 
+annotate UserService.Departments with @(
+    Common.SemanticKey: [ID],
+    UI: {
+        PresentationVariant  : {
+            $Type : 'UI.PresentationVariantType',
+            RequestAtLeast : [
+              ID  
+            ],            
+        },
+    }
+){
+    ID @(
+        title: '{i18n>Departments.Department}',
+        Common: {
+            Text : departmentName,
+            TextArrangement : #TextOnly,
+            SemanticObject : 'Departments',
+        }
+    );
+    departmentName @UI.ExcludeFromNavigationContext
+};

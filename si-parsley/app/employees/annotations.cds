@@ -1,5 +1,7 @@
 using UserService as UserService from '../../srv/user-service';
 
+
+
 annotate UserService.Employees with @(
     Capabilities.InsertRestrictions: {
         Insertable: true
@@ -66,27 +68,11 @@ annotate UserService.Employees with @(
                 $Type : 'UI.DataField',
                 Value : hireDate,
             },
-            // {
-            //     $Type: 'UI.DataField',
-            //     Value: depId
-            // },
-            // {
-            //     $Type: 'UI.DataFieldWithIntentBasedNavigation',
-            //     SemanticObject: 'departments',
-            //     Action : 'list',
-            //     Value: Department.ID
-            // },
             {
                 $Type: 'UI.DataFieldWithIntentBasedNavigation',
                 SemanticObject: 'departments',
                 Action : 'list',
-                Value: depId,
-                Mapping:[
-                    {
-                        LocalProperty: depId,
-                        SemanticObjectProperty: 'ID'
-                    }                    
-                ]
+                Value: Department.ID,
             }
         ],
     },

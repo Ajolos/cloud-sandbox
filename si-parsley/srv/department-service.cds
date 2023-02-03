@@ -11,3 +11,11 @@ service DepartmentService {
     };
     entity Employees as projection on my.Employees;
 }
+
+annotate Department with @(
+    Common.SemanticKey: [ID]
+){
+    ID @Common: { 
+        SemanticObject: 'Departments'
+    }
+};

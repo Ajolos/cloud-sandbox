@@ -12,6 +12,7 @@ service UserService {
         description,
         position,
         firstName || ' ' || lastName as fullName: String(100),
+        Department.ID as depId,
         Department.departmentName as departmentName,
         Department.Manager.firstName || ' ' || Department.Manager.lastName as supervisor: String(50),
         Average.Average as rating,
@@ -30,6 +31,7 @@ service UserService {
 }
 
 annotate UserService.Employees with @(
+    Common.SemanticKey: [emailAddress],
     Capabilities: {
         Deletable: false
     },
@@ -43,15 +45,45 @@ annotate UserService.Employees with @(
         },
     }
 ){
-    emailAddress @title: '{i18n>Employees.EmailAddress}';
-    firstName @title : '{i18n>Employees.FirstName}';
-    lastName @title: '{i18n>Employees.LastName}';
-    fullName @title: '{i18n>Employees.FullName}';
-    position @title: '{i18n>Employees.Position}';
-    dateOfBirth @title: '{i18n>Employees.DateOfBirth}';
-    hireDate @title: '{i18n>Employees.HireDate}';
+    emailAddress @(
+        title: '{i18n>Employees.EmailAddress}',
+        UI.ExcludeFromNavigationContext,
+        Common.SemanticObject: 'Employees'
+    );
+    firstName @(
+        title : '{i18n>Employees.FirstName}',
+        UI.ExcludeFromNavigationContext
+    );
+    lastName @(
+        title: '{i18n>Employees.LastName}',
+        UI.ExcludeFromNavigationContext
+    );
+    fullName @(
+        title: '{i18n>Employees.FullName}',
+        UI.ExcludeFromNavigationContext
+    );
+    position @(
+        title: '{i18n>Employees.Position}',
+        UI.ExcludeFromNavigationContext
+    );
+    dateOfBirth @(
+        title: '{i18n>Employees.DateOfBirth}',
+        UI.ExcludeFromNavigationContext
+    );
+    hireDate @(
+        title: '{i18n>Employees.HireDate}',
+        UI.ExcludeFromNavigationContext
+    );
+    depId @(
+        title: 'depId',
+        Common: {
+            Text: departmentName,
+            TextArrangement : #TextFirst
+        }
+    );
     departmentName @(
         title: '{i18n>Employees.Department}',
+        UI.ExcludeFromNavigationContext,
         Common.ValueListWithFixedValues: true,
         Common.ValueList: {
             CollectionPath: 'Departments',
@@ -64,11 +96,18 @@ annotate UserService.Employees with @(
             ]
         }
     );
-    supervisor @title: '{i18n>Employees.Manager}';
-    rating @title: '{i18n>Employees.Rating}';
+    supervisor @(
+        title: '{i18n>Employees.Manager}',
+        UI.ExcludeFromNavigationContext
+    );
+    rating @(
+        title: '{i18n>Employees.Rating}',
+        UI.ExcludeFromNavigationContext
+        );
     description @(
         title: '{i18n>Employees.Description}',
-        UI.MultiLineText
+        UI.MultiLineText,
+        UI.ExcludeFromNavigationContext
     );
 }
 

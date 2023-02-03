@@ -66,9 +66,27 @@ annotate UserService.Employees with @(
                 $Type : 'UI.DataField',
                 Value : hireDate,
             },
+            // {
+            //     $Type: 'UI.DataField',
+            //     Value: depId
+            // },
+            // {
+            //     $Type: 'UI.DataFieldWithIntentBasedNavigation',
+            //     SemanticObject: 'departments',
+            //     Action : 'list',
+            //     Value: Department.ID
+            // },
             {
-                $Type: 'UI.DataField',
-                Value: departmentName
+                $Type: 'UI.DataFieldWithIntentBasedNavigation',
+                SemanticObject: 'departments',
+                Action : 'list',
+                Value: depId,
+                Mapping:[
+                    {
+                        LocalProperty: depId,
+                        SemanticObjectProperty: 'ID'
+                    }                    
+                ]
             }
         ],
     },
@@ -92,7 +110,7 @@ annotate UserService.Employees with @(
         {
             $Type : 'UI.ReferenceFacet',
             Target : 'Comments/@UI.LineItem',
-            Label : 'Comments',
+            Label : '{i18n>CommentsSection}',
         }
     ]
 );

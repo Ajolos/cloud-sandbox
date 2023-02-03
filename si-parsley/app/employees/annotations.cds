@@ -65,6 +65,10 @@ annotate UserService.Employees with @(
             {
                 $Type : 'UI.DataField',
                 Value : hireDate,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: departmentName
             }
         ],
     },

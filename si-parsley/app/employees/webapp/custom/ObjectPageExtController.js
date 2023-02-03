@@ -16,6 +16,8 @@ function (){
                     that.commentDialog.open();
                 }.bind(this));
             }else{
+                that.commentDialog.getBindingContext().setProperty("$Parameter/rating",0);
+                that.commentDialog.getBindingContext().setProperty("$Parameter/content","");
                 that.commentDialog.open();
             }
         },

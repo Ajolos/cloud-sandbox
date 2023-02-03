@@ -1,8 +1,10 @@
 sap.ui.define([],
 function (){
     "use strict";
+    var extensionAPI;
     var that =  {
         callCommentDialog: function(oContext) {
+            extensionAPI = this;
             if(!that.commentDialog){
                 this.loadFragment({
                     name: "pl.sic.parsley.employees.custom.fragments.CommentDialog",
@@ -19,7 +21,10 @@ function (){
         },
 
         commentConfirmPress: function(oEvent){
-            that.commentDialog.getObjectBinding().execute();
+            that.commentDialog.getObjectBinding().execute().then((r) => {
+                that.commentDialog.close();
+                extensionAPI.getBindingContext().refresh();
+            });
         },
 
         commentCancelPress: function(oEvent){

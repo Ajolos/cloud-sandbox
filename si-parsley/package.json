@@ -7,7 +7,9 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^6",
-    "express": "^4"
+    "express": "^4",
+    "@sap/xssec": "^3",
+    "passport": "^0"
   },
   "devDependencies": {
     "@sap/ux-specification": "^1.102.15",
@@ -51,17 +53,22 @@
     "requires": {
       "db": {
         "kind": "sql"
+      },
+      "[hybrid]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
+      },
+      "auth": {
+        "kind": "xsuaa"
+      },
+      "approuter": {
+        "kind": "cloudfoundry"
       }
     }
   },
   "sapux": [
     "app/employees",
-    "app/pl.sic.parsley.employees",
-    "app/pl.sic.parsley.employees",
-    "app/employees",
-    "app/departments",
-    "app/departments",
-    "app/departments",
     "app/departments"
   ]
 }

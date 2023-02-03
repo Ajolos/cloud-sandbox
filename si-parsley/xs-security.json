@@ -1,0 +1,25 @@
+{
+  "xsappname": "si-parsley-hybrid",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.employee",
+      "description": "Non privileged employee"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "SI-Parsley-employee",
+      "scope-references": [
+        "$XSAPPNAME.employee"
+      ],
+      "description": "generated"
+    }
+  ],
+  "oauth2-configuration": {
+    "redirect-uris": [
+      "http://localhost:5000/"
+    ]
+  }
+}

@@ -2,6 +2,7 @@ using { pl.sic.parsley as my } from '../db/schema';
 
 @path: 'service/userService'
 service UserService {
+    @requires: 'authenticated-user'
     entity Employees as projection on my.Employees {
         emailAddress,
         firstName,
@@ -72,6 +73,9 @@ annotate UserService.Employees with @(
 }
 
 annotate UserService.Comments with @(
+    UI.PresentationVariant: {
+        RequestAtLeast: [Sender_emailAddress]
+    },
     Capabilities: {
         Deletable: false,
         Insertable: true
@@ -81,4 +85,12 @@ annotate UserService.Comments with @(
     author @title: '{i18n>Comments.author}';
     rating @title: '{i18n>Comments.rating}';
 }
+
+annotate UserService.createComment with @(
+    Common.SideEffects: {
+        TargetProperties: [
+            _it.Comments
+        ]
+    }
+);
 

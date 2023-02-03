@@ -111,7 +111,7 @@ annotate UserService.Comments with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: Sender.fullName
+            Value: author
         },
         {
             $Type: 'UI.DataFieldForAnnotation',

@@ -1,8 +1,12 @@
 const cds = require ('@sap/cds');
+const fs = require( 'fs' );
+const util = require( 'util' );
 
 class UserService extends cds.ApplicationService{
     async init(){
-        
+
+        const log_file = fs.createWriteStream(__dirname + '/debug.log', { flags: 'w' });
+
         this.on("createComment", async req => {
             const receiver = req.params.find(o => { return o.hasOwnProperty("emailAddress") }).emailAddress
             const data = {
@@ -11,8 +15,7 @@ class UserService extends cds.ApplicationService{
                 Receiver_emailAddress: receiver,
                 Sender_emailAddress: req.req.user.id
             }
-            
-        
+            // log_file.write(util.format(req) + '\n');
             const db = this.transaction(req);
             let result = await this.post(this.entities.Comments).entries(data);
         })

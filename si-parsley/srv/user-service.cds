@@ -3,7 +3,14 @@ using { pl.sic.parsley as my } from '../db/schema';
 @path: 'service/userService'
 service UserService {
     @requires: 'authenticated-user'
-    entity Employees as projection on my.Employees {
+    entity Employees @(
+        restrict: [
+            { 
+                grant: ['READ','createComment'], 
+                to: 'UserCreateRemove'
+            }
+        ]
+    ) as projection on my.Employees{
         emailAddress,
         firstName,
         lastName,

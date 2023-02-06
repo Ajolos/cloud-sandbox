@@ -3,18 +3,80 @@
   "tenant-mode": "dedicated",
   "scopes": [
     {
-      "name": "$XSAPPNAME.employee",
-      "description": "Non privileged employee"
+      "name": "$XSAPPNAME.UserConsume",
+      "description": "Read and comment on employees"
+    },
+    {
+      "name": "$XSAPPNAME.UserCreateRemove",
+      "description": "Creating and removing user profile"
+    },
+    {
+      "name": "$XSAPPNAME.UserAssign",
+      "description": "Assign users to departments"
+    },
+    {
+      "name": "$XSAPPNAME.UserSelfManage",
+      "description": "Manage own data in user's profile"
+    },
+    {
+      "name": "$XSAPPNAME.DepartmentEdit",
+      "description": "Edit basic information about the department"
+    },
+    {
+      "name": "$XSAPPNAME.DepartmentCreateRemove",
+      "description": "Create, and remove departments, with manager assignment"
+    },
+    {
+      "name": "$XSAPPNAME.DepartmentConsume",
+      "description": "Consume basic information about departments"
     }
   ],
-  "attributes": [],
+  "attributes": [{
+    "name": "Groups",
+    "description": "Groups",
+    "valueType": "string",
+    "valueRequired": true
+  }],
   "role-templates": [
+    {
+      "name": "SI-Parsley-admin",
+      "scope-references": [
+        "$XSAPPNAME.DepartmentCreateRemove",
+        "$XSAPPNAME.UserCreateRemove"
+      ],
+      "attribute-references":[
+        {
+          "name": "Groups"
+        }
+      ],
+      "description": "SI-Parsley administrator"
+    },
+    {
+      "name": "SI-Parsley-manager",
+      "scope-references": [
+        "$XSAPPNAME.UserAssign",
+        "$XSAPPNAME.DepartmentEdit"
+      ],
+      "attribute-references":[
+        {
+          "name": "Groups"
+        }
+      ],
+      "description": "Department manager"
+    },
     {
       "name": "SI-Parsley-employee",
       "scope-references": [
-        "$XSAPPNAME.employee"
+        "$XSAPPNAME.UserConsume",
+        "$XSAPPNAME.UserSelfManage",
+        "$XSAPPNAME.DepartmentConsume"
       ],
-      "description": "generated"
+      "attribute-references":[
+        {
+          "name": "Groups"
+        }
+      ],
+      "description": "Non privileged user (employee)"
     }
   ],
   "oauth2-configuration": {

@@ -7,7 +7,12 @@ service UserService {
         restrict: [
             { 
                 grant: ['READ','createComment'], 
-                to: 'UserCreateRemove'
+                to: 'UserConsume'
+            },
+            {
+                grant: ['UPDATE'],
+                to: 'UserSelfManage',
+                where: '$user = emailAddress'
             }
         ]
     ) as projection on my.Employees{
@@ -27,8 +32,31 @@ service UserService {
     } actions {
         action createComment( rating: Integer, content: String )
     };
-    entity Departments as projection on my.Departments;
-    entity Comments as projection on my.Comments {
+    entity Departments @(
+        restrict: [
+            {
+                grant: ['READ'],
+                to: 'UserConsume'
+            }
+        ]
+    ) as projection on my.Departments;
+    entity Comments @(
+        restrict: [
+            {
+                grant: ['READ'],
+                to: 'UserConsume'
+            },
+            {
+                grant: ['DELETE'],
+                to: 'UserSelfManage',
+                where: '$user = Receiver.emailAddress'
+            },{
+                grant: ['DELETE'],
+                to: 'UserConsume',
+                where: '$user = Sender.emailAddress'
+            }
+        ]
+    ) as projection on my.Comments {
         *,
         Sender.firstName || ' ' || Sender.lastName as author: String(50),
         value as rating,
@@ -38,6 +66,7 @@ service UserService {
 annotate UserService.Employees with @(
     Common.SemanticKey: [emailAddress],
     Capabilities: {
+        Insertable: false,
         Deletable: false
     },
     UI: {

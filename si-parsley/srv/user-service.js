@@ -1,9 +1,9 @@
-const cds = require ('@sap/cds');
-const fs = require( 'fs' );
-const util = require( 'util' );
+const cds = require('@sap/cds');
+const fs = require('fs');
+const util = require('util');
 
-class UserService extends cds.ApplicationService{
-    async init(){
+class UserService extends cds.ApplicationService {
+    async init() {
 
         const log_file = fs.createWriteStream(__dirname + '/debug.log', { flags: 'w' });
 
@@ -20,12 +20,42 @@ class UserService extends cds.ApplicationService{
             let result = await this.post(this.entities.Comments).entries(data);
         })
 
-        this.after("READ","Comments", async (comments) => {
-            for(let each of comments){
-                if(each.author === null && each.Sender_emailAddress){
-                    each.author = each.Sender_emailAddress                    
-                }else if(each.author === null){
-                    let result = await this.get(this.entities.Comments).where({ID: each.ID})
+        this.after("READ", "Employees", (employees, req) => {
+            let loggedUser = "", request;
+            try{
+                if (req.hasOwnProperty("req")) {
+                    request = req.req;
+                } else if (req.hasOwnProperty("_")){
+                    request = req._.req;
+                } else {
+                    log_file.write("No req!");
+                }
+                if(request){
+                    if(request.hasOwnProperty("tokenInfo")){
+                        loggedUser = request.tokenInfo.getPayload().user_name;
+                    }else{
+                        log_file.write("No tokenInfo");
+                    }
+                }
+            }catch(e){
+                log_file.write(util.format(e));
+            }
+            if (employees instanceof Array) {
+                for (let each of employees) {
+                    each.IsSelf = (each.emailAddress === loggedUser);
+                }
+            } else {
+                employees.IsSelf = (employees.emailAddress === loggedUser);
+            }
+
+        })
+
+        this.after("READ", "Comments", async (comments) => {
+            for (let each of comments) {
+                if (each.author === null && each.Sender_emailAddress) {
+                    each.author = each.Sender_emailAddress
+                } else if (each.author === null) {
+                    let result = await this.get(this.entities.Comments).where({ ID: each.ID })
                     each.author = result[0].Sender_emailAddress
                 }
             }

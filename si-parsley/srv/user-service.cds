@@ -1,8 +1,8 @@
 using { pl.sic.parsley as my } from '../db/schema';
 
 @path: 'service/userService'
+@requires: 'authenticated-user'
 service UserService {
-    @requires: 'authenticated-user'
     entity Employees @(
         restrict: [
             { 
@@ -27,8 +27,8 @@ service UserService {
         Department.Manager.firstName || ' ' || Department.Manager.lastName as supervisor: String(50),
         Average.Average as rating,
         Comments,
-        Department
-       
+        Department,
+        virtual false as IsSelf: Boolean        
     } actions {
         action createComment( rating: Integer, content: String )
     };
@@ -70,6 +70,9 @@ annotate UserService.Employees with @(
         Deletable: false
     },
     UI: {
+        PresentationVariant: {
+            RequestAtLeast: [emailAddress]
+        },
         HeaderInfo  : {
             Title : {
                 Value: fullName

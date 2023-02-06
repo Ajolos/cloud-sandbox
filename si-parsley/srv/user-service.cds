@@ -51,7 +51,7 @@ service UserService {
                 to: 'UserSelfManage',
                 where: '$user = Receiver.emailAddress'
             },{
-                grant: ['DELETE'],
+                grant: ['DELETE','CREATE'],
                 to: 'UserConsume',
                 where: '$user = Sender.emailAddress'
             }

@@ -177,7 +177,7 @@
                   "actions": {
                     "callCommentDialog": {
                       "press": "pl.sic.parsley.employees.custom.ObjectPageExtController.callCommentDialog",
-                      "visible": true,
+                      "visible": "{=!${IsSelf}}",
                       "enabled": true,
                       "requiresSelection": false,
                       "text": "{i18n>CallCommentDialog}"

@@ -26,9 +26,11 @@ service UserService {
         firstName || ' ' || lastName as fullName: String(100),
         Department.Manager.firstName || ' ' || Department.Manager.lastName as supervisor: String(50),
         Average.Average as rating,
+        cast( Average.Average as Boolean ) as isRatingVisible,
         Comments,
         Department,
-        virtual false as IsSelf: Boolean        
+        virtual false as IsSelf: Boolean,
+        substr(firstName, 1, 1) || substr(lastName, 1, 1) as initials: String(2)
     } actions {
         action createComment( rating: Integer, content: String )
     };
@@ -74,6 +76,7 @@ annotate UserService.Employees with @(
             RequestAtLeast: [emailAddress]
         },
         HeaderInfo  : {
+            Initials: initials,
             Title : {
                 Value: fullName
             },

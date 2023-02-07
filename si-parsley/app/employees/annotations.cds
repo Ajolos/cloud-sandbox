@@ -15,6 +15,7 @@ annotate UserService.Employees with @(
         Value: rating,
         TargetValue : 5,
         Visualization : #Rating,
+        
     },
     UI.LineItem : [
         {
@@ -83,7 +84,8 @@ annotate UserService.Employees with @(
         },
         {
             $Type: 'UI.ReferenceFacet',
-            Target: '@UI.DataPoint#Rating'
+            Target: '@UI.DataPoint#Rating',
+            ![@UI.Hidden]: { $edmJson: {$Ne: [ { $Path:'isRatingVisible'}, true ] } }
         }        
     ],
     UI.Facets : [

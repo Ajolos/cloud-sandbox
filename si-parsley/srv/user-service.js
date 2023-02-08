@@ -22,6 +22,7 @@ class UserService extends cds.ApplicationService {
 
         this.after("READ", "Employees", (employees, req) => {
             let loggedUser = "", request;
+
             try{
                 if (req.hasOwnProperty("req")) {
                     request = req.req;
@@ -40,12 +41,21 @@ class UserService extends cds.ApplicationService {
             }catch(e){
                 log_file.write(util.format(e));
             }
+            
+            function enhanceRow(row){
+                if(!isNaN(parseFloat(row.rating))){
+                    row.rating = Math.round( row.rating * 10 ) / 10;
+                }                   
+                row.IsSelf = (row.emailAddress === loggedUser);
+                return row;
+            }
+            
             if (employees instanceof Array) {
                 for (let each of employees) {
-                    each.IsSelf = (each.emailAddress === loggedUser);
+                    each = enhanceRow(each);
                 }
             } else {
-                employees.IsSelf = (employees.emailAddress === loggedUser);
+                employees = enhanceRow(employees);
             }
 
         })

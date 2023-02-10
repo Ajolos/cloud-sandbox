@@ -5,6 +5,6 @@ if (process.env.NODE_ENV !== 'production') {
     // Enable launchpad plugin
     cds.once('bootstrap',(app)=>{
         const handler = new cds_launchpad_plugin();
-        app.use(handler.setup({theme:'sap_horizon'}));
+        app.use(handler.setup({theme:'sap_horizon_dark' }));
     });
 }

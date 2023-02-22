@@ -1,4 +1,15 @@
 # cloud-sandbox
+Initial setup:
+
+commands (/si-parsley):
+npm install
+npm install -prefix app
+
+missing files:
+> .cdsrc-private.json
+> app > default-env.json
+
+Launching:
 
 1. Logon to CF 
 cf l -a https://api.cf.us10-001.hana.ondemand.com/

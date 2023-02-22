@@ -127,6 +127,15 @@ annotate UserService.Employees with @(
         UI.MultiLineText,
         UI.ExcludeFromNavigationContext
     );
+    initials @(
+        UI.ExcludeFromNavigationContext
+    );
+    IsSelf @(
+        UI.ExcludeFromNavigationContext
+    );
+    isRatingVisible @(
+        UI.ExcludeFromNavigationContext
+    )
 }
 
 annotate UserService.Comments with @(

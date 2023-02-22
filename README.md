@@ -6,8 +6,8 @@ npm install
 npm install -prefix app
 
 missing files:
-> .cdsrc-private.json
-> app > default-env.json
+- .cdsrc-private.json
+- app > default-env.json
 
 Launching:
 

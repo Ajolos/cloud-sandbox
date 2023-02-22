@@ -2,8 +2,8 @@
 Initial setup:
 
 commands (/si-parsley):
-npm install
-npm install -prefix app
+- npm install
+- npm install -prefix app
 
 missing files:
 - .cdsrc-private.json
